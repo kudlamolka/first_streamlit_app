@@ -12,6 +12,8 @@ streamlit.text('🥗Kale, Spinach & Rocket Smoothie')
 streamlit.text('🐔Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞Avocado Toast')
 
+###########################################################################################################################
+
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 
@@ -20,6 +22,8 @@ my_fruit_list = my_fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 streamlit.dataframe(fruits_to_show)
+
+###########################################################################################################################
 
 streamlit.header("Fruityvice Fruit Advice!")
 
@@ -37,7 +41,7 @@ except URLError as e:
   streamlit.error()
   
   
-  
+ ##########################################################################################################################
 
 
 streamlit.header("Fruit load list contains")
@@ -52,12 +56,10 @@ if streamlit.button('Get Fruit Load List'):
   my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
   my_data_rows = get_fruit_load_list
   streamlit.dataframe(my_data_rows)
+  
 
-
-query = f"INSERT INTO fruit_load_list VALUES ('{add_my_fruit}')"
-my_cur.execute(query)
-streamlit.write(f"Thanks for adding {add_my_fruit}")  
-
+###########################################################################################################################
+  
 def insert_row_to_snowflake(fruit_name):
   with my_cnx.cursor() as my_cur:
     my_cur.execute(f"INSERT INTO fruit_load_list VALUES ('from streamlit')")
